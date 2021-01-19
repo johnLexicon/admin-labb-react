@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import {
   AppBar,
@@ -22,7 +22,8 @@ const useStyles = makeStyles({
   },
 });
 
-const NavBar = ({ user, signIn, signOut }) => {
+const NavBar = ({ user, signOut }) => {
+  const history = useHistory()
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null)
 
@@ -105,8 +106,8 @@ const NavBar = ({ user, signIn, signOut }) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}>
                 <MenuItem onClick={(e) => {
-                    signIn(e)
                     handleClose()
+                    history.push('/signin')
                 }}>Sign in</MenuItem>
               </Menu>
             </Grid> 
