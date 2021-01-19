@@ -1,4 +1,5 @@
-import firebase from 'firebase/app';
+import firebase from 'firebase'
+import 'firebase/auth'
 
 const firebaseConfig = {
     apiKey: "AIzaSyCyFVHH7GX6cTKxatMcBv6ONCY83odtLIU",
