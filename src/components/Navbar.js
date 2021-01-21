@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 
 const NavBar = () => {
   const history = useHistory()
-  const admin = useSelector(state => state.admin)
+  const admin = useSelector(state => state.adminReducer.admin)
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
 
