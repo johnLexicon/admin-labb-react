@@ -20,22 +20,22 @@ const useStyles = makeStyles({
   },
 });
 
-export default function UserCard() {
+export default function UserCard({user}) {
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
       <CardContent>
         <Typography variant="h5" component="h2">
-          John Lundgren
+          {user.firstName} {user.lastName}
         </Typography>
         <CardMedia
           className={classes.media}
-          image="https://images.unsplash.com/photo-1544450804-9e5f64cb18de?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+          image={user.avatar}
           title="Contemplative Reptile"
         />
         <Typography variant="body2" component="p">
-          Email: j@hotmail.com
+          Email: {user.email}
         </Typography>
       </CardContent>
     </Card>
