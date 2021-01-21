@@ -1,5 +1,7 @@
 import React, {useState} from "react";
+import {useSelector} from 'react-redux';
 import { NavLink, useHistory } from "react-router-dom";
+import firebase from '../firebase';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import {
   AppBar,
@@ -22,52 +24,29 @@ const useStyles = makeStyles({
   },
 });
 
-const NavBar = ({ user, signOut }) => {
+const NavBar = () => {
   const history = useHistory()
-  const classes = useStyles();
+  const admin = useSelector(state => state.admin)
+  const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
 
+  const signOut = () => {
+    console.log("Sign Out");
+    firebase.auth().signOut()
+      .then(() => {
+        history.push("/")
+      })
+      .catch(err => {
+        console.log(err.message);
+      })
+  }
+
   const handleMenu = (event) => {
-    console.log('handle menu');
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
-      console.log('handle close');
     setAnchorEl(null);
-  };
-
-  const NavigationLinks = () => {
-    if (user) {
-      return (
-        <>
-          <Grid item>
-            <Button
-              activeClassName={classes.highlighted}
-              className={classes.menuLink}
-              component={NavLink}
-              to="/create"
-            >
-              Create User
-            </Button>
-          </Grid>
-        </>
-      );
-    }
-    return (
-      <>
-        <Grid item>
-          <Button
-            activeClassName={classes.highlighted}
-            className={classes.menuLink}
-            component={NavLink}
-            to="/users"
-          >
-            Users
-          </Button>
-        </Grid>
-      </>
-    );
   };
 
   return (
@@ -80,7 +59,26 @@ const NavBar = ({ user, signOut }) => {
             </Typography>
           </Grid>
           <Grid item sm></Grid>
-          <NavigationLinks />
+          <Grid item>
+          <Button
+            activeClassName={classes.highlighted}
+            className={classes.menuLink}
+            component={NavLink}
+            to="/users"
+          >
+            Users
+          </Button>
+        </Grid>
+        {admin && <Grid item>
+            <Button
+              activeClassName={classes.highlighted}
+              className={classes.menuLink}
+              component={NavLink}
+              to="/create"
+            >
+              Create User
+            </Button>
+          </Grid>}
             <Grid item>
               <IconButton
                 aria-label="account of current user"
@@ -105,10 +103,14 @@ const NavBar = ({ user, signOut }) => {
                 }}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}>
+                {admin ? <MenuItem onClick={(e) => {
+                    handleClose()
+                    signOut()
+                }}>Sign Out</MenuItem> : 
                 <MenuItem onClick={(e) => {
                     handleClose()
                     history.push('/signin')
-                }}>Sign in</MenuItem>
+                }}>Sign in</MenuItem>}
               </Menu>
             </Grid> 
         </Grid>
