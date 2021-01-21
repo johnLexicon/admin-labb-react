@@ -4,7 +4,7 @@ const initialState = {
     admin: null
 }
 
-export const adminReducer = (state = initialState, action) => {
+const adminReducer = (state = initialState, action) => {
     const {SET_ADMIN} = actionTypes().admin
     const {type, payload} = action
 
@@ -20,3 +20,5 @@ export const adminReducer = (state = initialState, action) => {
             return state
     }
 }
+
+export default adminReducer
