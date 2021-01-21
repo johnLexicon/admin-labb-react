@@ -1,4 +1,8 @@
+import React, {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
+import {setAdminAction} from './actions/adminActions';
 import {Switch, Route} from 'react-router-dom';
+import firebase from './firebase';
 import './App.css';
 import Users from './views/Users';
 import CreateUser from './views/CreateUser';
@@ -8,6 +12,13 @@ import NavBar from './components/Navbar';
 import {Container} from '@material-ui/core';
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(fbUser => {
+      dispatch(setAdminAction(fbUser))
+    })
+  }, [])
   return (
     <div>
       <NavBar/>
