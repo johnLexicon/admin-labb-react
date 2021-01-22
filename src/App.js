@@ -9,20 +9,29 @@ import CreateUser from './views/CreateUser';
 import SignIn from './views/SignIn';
 import Home from './views/Home';
 import NavBar from './components/Navbar';
-import {Container} from '@material-ui/core';
+import {Container, makeStyles} from '@material-ui/core';
+
+const useStyles = makeStyles({
+  root: {
+    textAlign: 'center',
+    marginTop: '3.5rem'
+  }
+})
 
 function App() {
   const dispatch = useDispatch()
+  const classes = useStyles()
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(fbUser => {
       dispatch(setAdminAction(fbUser))
     })
   }, [])
+
   return (
     <div>
       <NavBar/>
-      <Container maxWidth="lg">
+      <Container className={classes.root} maxWidth="lg">
         <Switch>
           <Route path="/" exact><Home/></Route>
           <Route path="/users" exact><Users/></Route>

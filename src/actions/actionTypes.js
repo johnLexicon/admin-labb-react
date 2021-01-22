@@ -7,7 +7,9 @@ export const actionTypes = () => {
         users: {
             GET_USERS: 'GET_USERS',
             SET_USERS: 'SET_USERS',
-            LOADING: 'LOADING'
+            LOADING: 'LOADING',
+            ADD_USER: 'ADD_USER',
+            DEL_USER: 'DEL_USER'
         }
     }
 }

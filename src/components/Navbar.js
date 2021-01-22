@@ -103,11 +103,12 @@ const NavBar = () => {
                 }}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}>
-                {admin ? <MenuItem onClick={(e) => {
-                    handleClose()
-                    signOut()
-                }}>Sign Out</MenuItem> : 
-                <MenuItem onClick={(e) => {
+                {admin && <MenuItem onClick={handleClose}>Admin: {admin.email}</MenuItem>}
+                {admin && <MenuItem onClick={(e) => {
+                  handleClose()
+                  signOut()
+              }}>Sign Out</MenuItem>}
+                {!admin && <MenuItem onClick={(e) => {
                     handleClose()
                     history.push('/signin')
                 }}>Sign in</MenuItem>}

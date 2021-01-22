@@ -10,6 +10,12 @@ export const getUsersAction = () => {
     }
 }
 
+export const addUserAction = (user) => {
+    return async () => {
+        await axios.post('http://localhost:9999/users', user)
+    }
+}
+
 export const setUsersAction = (users) => {
     const {SET_USERS} = actionTypes().users
 

@@ -11,13 +11,13 @@ const Users = () => {
 
     useEffect(() => {
         dispatch(getUsersAction())
-    }, [])
+    }, [dispatch])
 
     return (
         <div>
             {isLoading ? <Typography variant="h3">Loading...</Typography> : <Typography variant="h3">Users</Typography>}            
             {users && <Grid container spacing={3}>
-                {users.map(user => (<Grid item>
+                {users.map(user => (<Grid item key={user.id}>
                     <UserCard user={user}/>
                 </Grid>))}
             </Grid>}
