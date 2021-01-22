@@ -21,7 +21,6 @@ const CreateUserForm = ({validationSchema}) => {
         validationSchema={validationSchema}
         initialValues={{firstName: '', lastName: '', email:'', avatar: ''}}
         onSubmit={(data, {resetForm}) => {
-          console.log(data);
           const {firstName, lastName, email, avatar} = data
           dispatch(addUserAction({firstName, lastName, email, avatar}))
           resetForm()
