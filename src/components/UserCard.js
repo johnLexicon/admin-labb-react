@@ -1,41 +1,56 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles'
+import {Typography, IconButton, CardMedia, CardContent, Card, Box} from '@material-ui/core';
+import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded';
+import { useDispatch } from 'react-redux';
+import { removeUser } from './../actions/usersActions';
 
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
   },
   title: {
-    fontSize: 14,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  delIcon:{
+    color: 'red',
+    marginTop: '-6px'
   },
   media: {
     height: 240,
+    marginBottom: '1rem'
   },
   pos: {
     marginBottom: 12,
   },
 });
 
-export default function UserCard() {
+export default function UserCard({user}) {
+  const dispatch = useDispatch()
   const classes = useStyles();
+
+  const handleDelete = (userId) => {
+    dispatch(removeUser(userId))
+  }
 
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Typography variant="h5" component="h2">
-          John Lundgren
-        </Typography>
+        <Box className={classes.title}>
+          <Typography variant="h5" component="div" gutterBottom>
+            {user.firstName} {user.lastName}
+          </Typography>
+          <IconButton onClick={() => {handleDelete(user.id)}} className={classes.delIcon}><DeleteForeverRoundedIcon/></IconButton>
+        </Box>
         <CardMedia
           className={classes.media}
-          image="https://images.unsplash.com/photo-1544450804-9e5f64cb18de?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+          image={user.avatar}
           title="Contemplative Reptile"
         />
         <Typography variant="body2" component="p">
-          Email: j@hotmail.com
+          <strong>Email:</strong> {user.email}
         </Typography>
       </CardContent>
     </Card>
