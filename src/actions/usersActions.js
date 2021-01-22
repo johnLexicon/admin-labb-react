@@ -12,7 +12,18 @@ export const getUsersAction = () => {
 
 export const addUserAction = (user) => {
     return async () => {
+        if(!user.avatar){
+            const johnDoe = "https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_960_720.png"
+            user.avatar = johnDoe
+        }
         await axios.post('http://localhost:9999/users', user)
+    }
+}
+
+export const removeUser = userId => {
+    return async dispatch => {
+        await axios.delete('http://localhost:9999/users/' + userId)
+        dispatch(getUsersAction())
     }
 }
 

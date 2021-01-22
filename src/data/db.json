@@ -1,25 +1,11 @@
 {
   "users": [
     {
-      "id": "1",
-      "firstName": "Kalle",
-      "lastName": "Anka",
-      "avatar": "https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375_960_720.png",
-      "email": "kalle@email.se"
-    },
-    {
       "id": "2",
       "firstName": "Kajsa",
       "lastName": "Anka",
       "avatar": "https://cdn.pixabay.com/photo/2017/01/31/19/07/avatar-2026510_960_720.png",
       "email": "kajsa@email.se"
-    },
-    {
-      "id": "3",
-      "firstName": "Alexander",
-      "lastName": "Lukas",
-      "avatar": "https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_960_720.png",
-      "email": "alexander@email.se"
     },
     {
       "firstName": "Olle",
@@ -34,6 +20,20 @@
       "email": "sven@email.se",
       "avatar": "https://cdn.pixabay.com/photo/2017/01/31/21/23/avatar-2027366__340.png",
       "id": "3GTEWCB"
+    },
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "doe@email.se",
+      "avatar": "https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_960_720.png",
+      "id": "GOkXJPN"
+    },
+    {
+      "firstName": "Roy",
+      "lastName": "Junior",
+      "email": "roy@email.se",
+      "avatar": "https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375_960_720.png",
+      "id": "6LrE4Vd"
     }
   ]
 }
