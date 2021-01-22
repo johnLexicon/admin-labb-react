@@ -1,9 +1,17 @@
 import React from 'react'
 import * as Yup from 'yup'
-import {Typography} from '@material-ui/core';
+import {Typography, Container, makeStyles} from '@material-ui/core';
 import CreateUserForm from '../components/CreateUserForm';
 
+const useStyles = makeStyles({
+    root: {
+      textAlign: 'center',
+      marginTop: '3.5rem'
+    }
+})
+
 const CreateUser = () => {
+    const classes = useStyles()
 
     const validationSchema = Yup.object().shape({
         firstName: Yup.string().required('First name is required'),
@@ -12,10 +20,10 @@ const CreateUser = () => {
     })
 
     return (
-        <div>
+        <Container className={classes.root} maxWidth="lg">
             <Typography variant="h3">Create User</Typography>
             <CreateUserForm validationSchema={validationSchema} />
-        </div>
+        </Container>
     )
 }
 
