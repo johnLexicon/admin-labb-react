@@ -54,9 +54,9 @@ const NavBar = () => {
       <Toolbar>
         <Grid container spacing={2}>
           <Grid item>
-            <Typography variant="h5" component="div">
-              React Admin
-            </Typography>
+              <Typography className={classes.menuLink} style={{textDecoration: 'none'}} variant="h5" component={NavLink} to="/">
+                React Admin
+              </Typography>
           </Grid>
           <Grid item sm></Grid>
           <Grid item>
@@ -79,7 +79,7 @@ const NavBar = () => {
               Create User
             </Button>
           </Grid>}
-            <Grid item>
+          {admin && <Grid item>
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -103,17 +103,13 @@ const NavBar = () => {
                 }}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}>
-                {admin && <MenuItem onClick={handleClose}>Admin: {admin.email}</MenuItem>}
-                {admin && <MenuItem onClick={(e) => {
+                <MenuItem onClick={handleClose}>Admin: {admin.email}</MenuItem>
+                <MenuItem onClick={(e) => {
                   handleClose()
                   signOut()
-              }}>Sign Out</MenuItem>}
-                {!admin && <MenuItem onClick={(e) => {
-                    handleClose()
-                    history.push('/signin')
-                }}>Sign in</MenuItem>}
+              }}>Sign Out</MenuItem>
               </Menu>
-            </Grid> 
+            </Grid>}
         </Grid>
       </Toolbar>
     </AppBar>
