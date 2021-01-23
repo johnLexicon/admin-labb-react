@@ -1,7 +1,9 @@
 import React from 'react'
 import * as Yup from 'yup'
-import {Typography, Container, makeStyles} from '@material-ui/core';
+import {Container, makeStyles} from '@material-ui/core';
 import CreateUserForm from '../components/CreateUserForm';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import PageHeader from './../components/PageHeader';
 
 const useStyles = makeStyles({
     root: {
@@ -21,7 +23,7 @@ const CreateUser = () => {
 
     return (
         <Container className={classes.root} maxWidth="lg">
-            <Typography variant="h3">Create User</Typography>
+            <PageHeader title="Create User" subtitle="Create a new user" icon={<PersonAddIcon fontSize="large" />} />
             <CreateUserForm validationSchema={validationSchema} />
         </Container>
     )
