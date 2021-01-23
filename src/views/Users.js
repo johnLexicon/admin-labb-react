@@ -2,7 +2,9 @@ import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {getUsersAction} from '../actions/usersActions';
 import { Grid, Typography, Container, makeStyles } from '@material-ui/core'
+import PersonIcon from '@material-ui/icons/Person';
 import UserCard from '../components/UserCard'
+import PageHeader from './../components/PageHeader';
 
 const useStyles = makeStyles({
     root: {
@@ -22,8 +24,8 @@ const Users = () => {
 
     return (
         <Container className={classes.root} maxWidth="lg">
-            {isLoading ? <Typography variant="h3">Loading...</Typography> : <Typography variant="h3">Users</Typography>}            
-            {users && <Grid container spacing={3}>
+            <PageHeader title="Users" subtitle="Watch and remove users" icon={<PersonIcon fontSize="large" />} />            
+            {users && <Grid container spacing={3} style={{justifyContent: 'center', marginTop: '3rem'}}>
                 {users.map(user => (<Grid item key={user.id}>
                     <UserCard user={user}/>
                 </Grid>))}
