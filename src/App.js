@@ -19,7 +19,7 @@ function App() {
   }, [dispatch])
 
   return (
-    <div>
+    <div style={{height: '100vh'}}>
       <NavBar/>
         <Switch>
           <Route path="/" exact><Home/></Route>

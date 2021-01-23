@@ -5,14 +5,16 @@ import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded';
 import { useDispatch } from 'react-redux';
 import { removeUser } from './../actions/usersActions';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     minWidth: 275,
+    background: '#bababa',
   },
   title: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    color: '#fff'
   },
   delIcon:{
     color: 'red',
@@ -25,7 +27,7 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
-});
+}));
 
 export default function UserCard({user}) {
   const dispatch = useDispatch()
@@ -49,7 +51,7 @@ export default function UserCard({user}) {
           image={user.avatar}
           title="Contemplative Reptile"
         />
-        <Typography variant="body2" component="p">
+        <Typography variant="body2" component="p" color="textSecondary">
           <strong>Email:</strong> {user.email}
         </Typography>
       </CardContent>
