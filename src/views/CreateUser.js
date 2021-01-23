@@ -8,7 +8,7 @@ import PageHeader from './../components/PageHeader';
 const useStyles = makeStyles({
     root: {
       textAlign: 'center',
-      marginTop: '3.5rem'
+      marginTop: '3.5rem',
     }
 })
 

@@ -27,21 +27,21 @@ const CreateUserForm = ({validationSchema}) => {
         }
         }>
         {() => (
-        <Form>
+        <Form style={{margin: 'auto', marginTop: '5rem'}}>
           <Box margin={4}>
-            <CustomTextField type="text" name="firstName" label="First name" />
+            <CustomTextField type="text" name="firstName" label="First name" InputProps={{style:{fontSize: '1.5rem'}}} />
           </Box>
           <Box margin={4}>
-            <CustomTextField type="text" name="lastName" label="Last name" />
+            <CustomTextField type="text" name="lastName" label="Last name" InputProps={{style:{fontSize: '1.5rem'}}} />
           </Box>
           <Box margin={4}>
-            <CustomTextField type="email" name="email" label="Email" />
+            <CustomTextField type="email" name="email" label="Email" InputProps={{style:{fontSize: '1.5rem'}}} />
           </Box>
           <Box margin={4}>
-            <CustomTextField type="text" name="avatar" label="Photo Url" />
+            <CustomTextField type="text" name="avatar" label="Photo Url" InputProps={{style:{fontSize: '1.5rem'}}} />
           </Box>
           <Box margin={4}>
-            <Button variant="contained" color="primary" type="submit">
+            <Button variant="outlined" color="primary" type="submit" size="large">
               Submit
             </Button>
           </Box>
