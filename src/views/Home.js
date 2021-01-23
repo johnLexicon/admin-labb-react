@@ -1,5 +1,7 @@
 import React from 'react'
+import {useSelector} from 'react-redux';
 import { Box, Typography, makeStyles } from '@material-ui/core'
+import SignInForm from './../components/SignInForm';
 
 const usingStyles = makeStyles(theme => ({
     hero: {
@@ -9,10 +11,13 @@ const usingStyles = makeStyles(theme => ({
         backgroundSize: 'cover',
         position: 'relative',
         display: 'flex',
-        justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
         height: '100vh'
     },
     title:{
+        marginTop: '3rem',
+        marginBottom: '5rem',
         fontSize: '5rem',
         color: '#fff',
         [theme.breakpoints.down('xs')]: {
@@ -23,10 +28,15 @@ const usingStyles = makeStyles(theme => ({
 
 const Home = () => {
     const classes = usingStyles()
+    const admin = useSelector(state => state.adminReducer.admin)
+
     return (
+        <>
         <Box className={classes.hero}>
             <Typography className={classes.title}>React Admin</Typography>
+            {!admin && <SignInForm/>}
         </Box>
+        </>
     )
 }
 
