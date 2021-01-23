@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {getUsersAction} from '../actions/usersActions';
-import { Grid, Typography, Container, makeStyles } from '@material-ui/core'
+import { Grid, Container, makeStyles } from '@material-ui/core'
 import PersonIcon from '@material-ui/icons/Person';
 import UserCard from '../components/UserCard'
 import PageHeader from './../components/PageHeader';
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 
 const Users = () => {
     const dispatch = useDispatch()
-    const {users, isLoading} = useSelector(state => state.usersReducer)
+    const {users} = useSelector(state => state.usersReducer)
     const classes = useStyles()
 
     useEffect(() => {
