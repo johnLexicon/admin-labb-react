@@ -10,7 +10,7 @@ const prodRequests = {
         return users
     },
     post: async (user) => {
-        const docRef = await db.collection('users').add(user)
+        const docRef = await db.collection('users').doc(user.email).set(user)
         return {id: docRef.id, ...user}
     },
     delete: async (userId) => {
