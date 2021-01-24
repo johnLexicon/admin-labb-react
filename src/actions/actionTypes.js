@@ -9,7 +9,8 @@ export const actionTypes = () => {
             SET_USERS: 'SET_USERS',
             LOADING: 'LOADING',
             ADD_USER: 'ADD_USER',
-            DEL_USER: 'DEL_USER'
+            DEL_USER: 'DEL_USER',
+            USER_EXISTS: 'USER_EXISTS'
         }
     }
 }

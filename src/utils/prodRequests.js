@@ -1,7 +1,15 @@
 import {db} from '../firebase';
 
 const prodRequests = {
-    get: async () => {
+    get: async (opts = {}) => {
+        if(opts['email']){
+            const doc = await db.collection('users').doc(opts.email).get()
+            if(doc.exists){
+                return {id: doc.id, ...doc.data()}
+            } else {
+                return null
+            }
+        }
         const users = []
         const snapshot = await db.collection('users').get()
         snapshot.forEach(doc => {

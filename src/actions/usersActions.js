@@ -20,6 +20,18 @@ export const getUsersAction = () => {
     }
 }
 
+export const checkEmailUniquenessAction = (userEmail) => {
+    return async dispatch => {
+        const fetcher = await getFetcher()
+        const user = await fetcher.get({email: userEmail})
+        if(user){
+            dispatch(emailExistsAction(true))
+        } else {
+            dispatch(emailExistsAction(false))
+        }
+    }
+}
+
 export const addUserAction = (user) => {
     return async () => {
         if(!user.avatar){
@@ -27,7 +39,7 @@ export const addUserAction = (user) => {
             user.avatar = johnDoe
         }
         const fetcher = await getFetcher()
-        await fetcher.post(user)
+        await fetcher.post({id: user.email, ...user})
     }
 }
 
@@ -53,5 +65,13 @@ export const loadingAction = (isLoading) => {
     return {
         type: LOADING,
         payload: {isLoading}
+    }
+}
+
+export const emailExistsAction = (userExists) => {
+    const {USER_EXISTS} = actionTypes().users
+    return {
+        type: USER_EXISTS,
+        payload: {userExists}
     }
 }

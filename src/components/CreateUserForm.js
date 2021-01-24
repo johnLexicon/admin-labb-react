@@ -1,8 +1,9 @@
 import React from 'react'
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Formik, Form, useField} from 'formik'
 import {TextField, Box, Button} from '@material-ui/core'
-import { addUserAction } from '../actions/usersActions';
+import { addUserAction, checkEmailUniquenessAction } from '../actions/usersActions';
+import * as Yup from 'yup'
 
 const CustomTextField = ({label, ...props}) => {
     const [fields, meta] = useField(props)
@@ -12,9 +13,39 @@ const CustomTextField = ({label, ...props}) => {
     )
 }
 
-const CreateUserForm = ({validationSchema}) => {
+const CreateUserForm = () => {
 
     const dispatch = useDispatch()
+    const {userExists} = useSelector(state => state.usersReducer)
+
+
+    Yup.addMethod(Yup.string, 'checkDuplicatedEmail', () => {
+      return Yup.string().test('checkDuplicatedEmail', 'The email address already exists', 
+        async email => {
+          const re = /\S+@\S+\.\S+/
+
+          // Checks if the email is a valid email. If is not there is no use to dispatch the action for retrieving all the emails for comparison.
+          if(!re.test(email)){  
+            return true
+          }
+
+          await dispatch(checkEmailUniquenessAction(email))
+          if(userExists){
+            return false // NOT VALID!
+          } else {
+            return true
+          }
+        })
+      })
+    
+    const validationSchema = Yup.object().shape({
+      firstName: Yup.string().required('First name is required'),
+      lastName: Yup.string().required('Last name is required'),
+      email: Yup.string()
+        .checkDuplicatedEmail()
+        .email('Invalid Email')
+        .required('Email is required')
+    })
 
     return (
         <Formik 
@@ -26,7 +57,7 @@ const CreateUserForm = ({validationSchema}) => {
           resetForm()
         }
         }>
-        {() => (
+        {({isValid, dirty}) => (
         <Form style={{margin: 'auto', marginTop: '5rem'}}>
           <Box margin={4}>
             <CustomTextField type="text" name="firstName" label="First name" InputProps={{style:{fontSize: '1.5rem'}}} />
@@ -41,7 +72,7 @@ const CreateUserForm = ({validationSchema}) => {
             <CustomTextField type="text" name="avatar" label="Photo Url" InputProps={{style:{fontSize: '1.5rem'}}} />
           </Box>
           <Box margin={4}>
-            <Button variant="outlined" color="primary" type="submit" size="large">
+            <Button disabled={!(isValid && dirty)} variant="outlined" color="primary" type="submit" size="large">
               Submit
             </Button>
           </Box>

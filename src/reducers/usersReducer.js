@@ -2,11 +2,12 @@ import {actionTypes} from '../actions/actionTypes'
 
 const initialState = {
     users: null,
-    isLoading: true
+    isLoading: true,
+    userExists: false
 }
 
 const usersReducer = (state = initialState, action) => {
-    const {SET_USERS, LOADING} = actionTypes().users
+    const {SET_USERS, LOADING, USER_EXISTS} = actionTypes().users
     const {type, payload} = action
 
     switch(type){
@@ -22,6 +23,13 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading
+            }
+        }
+        case USER_EXISTS: {
+            const {userExists} = payload
+            return {
+                ...state,
+                userExists
             }
         }
         default:
